@@ -2,7 +2,27 @@ var gulp = require('gulp'),
     sass = require('gulp-ruby-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     minifycss = require('gulp-minify-css'),
-    rename = require('gulp-rename');
+    rename = require('gulp-rename'),
+    os = require('os'),
+    gulp = require('gulp'),
+    open = require('gulp-open');
+
+
+// Default usage:
+// Open one file with default application
+
+var browser = os.platform() === 'linux' ? 'google-chrome' : (
+  os.platform() === 'darwin' ? 'google chrome' : (
+  os.platform() === 'win32' ? 'chrome' : 'firefox'));
+
+gulp.task('app', function() {
+  var options = {
+    uri: 'http://localhost:4000',
+    app: browser
+  };
+  gulp.src('./index.html')
+    .pipe(open(options));
+});
 
 gulp.task('express', function() {
   var express = require('express');
@@ -46,7 +66,6 @@ gulp.task('watch', function() {
   gulp.watch('sass/*.scss', ['styles']);
   gulp.watch('*.html', notifyLiveReload);
   gulp.watch('css/*.css', notifyLiveReload);
-    gulp.watch('js/*.js', notifyLiveReload);
 });
 
 gulp.task('autoprefixer', function () {
@@ -58,6 +77,6 @@ gulp.task('autoprefixer', function () {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['styles', 'express', 'livereload', 'watch', 'autoprefixer'], function() {
+gulp.task('default', ['styles', 'express', 'app', 'livereload', 'watch', 'autoprefixer'], function() {
 
 });

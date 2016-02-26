@@ -1,16 +1,14 @@
 body {
   padding-top: 50px;
   padding-left: 100px;
-}
-
-#chartArea {
-  width: 400px;
-  height: 300px;
-  background-color: #828C8A;
-}
-
-.bar {
-  display: inline-block;
-   /* Gets overriden by D3-assigned height below */
-  margin-right: 2px;
+  #chartArea {
+    width: 400px;
+    height: 300px;
+    background-color: #828C8A;
+  }
+  .bar {
+    display: inline-block;
+    /* Gets overriden by D3-assigned height below */
+    margin-right: 2px;
+  }
 }
